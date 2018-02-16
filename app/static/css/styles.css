@@ -54,6 +54,6 @@ section {
 	margin: 1rem;
 }
 
-section.show {
+section.active {
 	display: block;
 }
