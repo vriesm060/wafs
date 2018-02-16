@@ -7,12 +7,11 @@
 		init: function () {
 			routes.init();
 		}
-	}
+	};
 
 	var routes = {
 		init: function () {
 			routes.getApi();
-			routes.findHash();
 		},
 		getApi: function () {
 			fetch ('https://kitsu.io/api/edge/anime')
@@ -21,15 +20,16 @@
 				})
 				.then(function (res, err) {
 
-					localStorage.setItem('data', JSON.stringify(res));
+					localStorage.setItem('data', JSON.stringify(res.data));
 					sections.insert(res.data);
+					routes.findHash(res.data);
 
 				})
 				.catch(function (err) {
 					console.log(err);
 				});
 		},
-		findHash: function () {
+		findHash: function (data) {
 			routie({
 				'home': function () {
 					sections.toggle('#home');
@@ -39,6 +39,27 @@
 				},
 				'episodes': function () {
 					sections.toggle('#episodes');
+				},
+				'details/:slug': function (slug) {
+					sections.toggle('#details');
+
+					var filterTitles = data.filter(function (item) {
+						if (item.attributes.slug === slug) return item;
+					});
+
+					var directives = {
+						posterImage: {
+							src: function () { return this.attributes.posterImage.small; }
+						},
+						title: {
+							text: function () { return this.attributes.titles.en_jp; }
+						},
+						synopsis: {
+							text: function () { return this.attributes.synopsis; }
+						}
+					}
+
+					Transparency.render(document.querySelector('#details'), filterTitles, directives);
 				}
 			});
 		}
@@ -46,17 +67,22 @@
 
 	var sections = {
 		insert: function (data) {
-			console.log(data[0].attributes.abbreviatedTitles[0]);
-			for (var i = 0; i < data.length; i++) {
-				var span = document.createElement('SPAN');
-				span.setAttribute('data-bind', 'title' + i);
-				span.textContent = data[i].attributes.abbreviatedTitles[0];
-			}
-			/*var homeContent = {
-				titles: 
-			};
+			var mapTitles = data.map(function (item) {
+				return item;
+			});
 
-			Transparency.render(document.querySelector('#home'), homeContent);*/
+			var directives = {
+				title: {
+					text: function () {
+						return this.attributes.titles.en_jp;
+					},
+					href: function (params) {
+						return params.value + '/' + this.attributes.slug;
+					}
+				}
+			}
+
+			Transparency.render(document.querySelector('#anime-shows'), mapTitles, directives);
 		},
 		toggle: function (route) {
 			var section = document.querySelectorAll('section');
@@ -64,34 +90,14 @@
 
 			section.forEach(function (item) {
 				if (item === current) {
-					item.classList.add('show');
+					item.classList.add('active');
 				} else {
-					item.classList.remove('show');
+					item.classList.remove('active');
 				}
 			});
 		}
 	};
 
-	var hash = function () { return window.location.hash; };
-
 	app.init();
-
-
-
-	// Oude routes:
-	/*var routes = {
-		init: function () {
-			routes.findHash();
-		},
-		findHash: function () {
-			if (hash().length) sections.toggle(hash());
-
-			window.addEventListener('hashchange', function () {
-				sections.toggle(hash());
-			}, false);
-		}
-	}*/
-
-
 
 })();
