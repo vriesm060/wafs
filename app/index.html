@@ -16,9 +16,12 @@
 		</ul>
 	</nav>
 
-	<section id="home" class="show">
+	<section id="home" class="active">
 		<h1>Home</h1>
-		<!-- <span data-bind="titles"></span> -->
+
+		<ul id="anime-shows">
+			<li><a data-bind="title" href="#details"></a></li>
+		</ul>
 	</section>
 
 	<section id="anime">
@@ -27,6 +30,12 @@
 
 	<section id="episodes">
 		<h1>Episodes</h1>
+	</section>
+
+	<section id="details">
+		<img data-bind="posterImage">
+		<h1 data-bind="title"></h1>
+		<p data-bind="synopsis"></p>
 	</section>
 
 	<script type="text/javascript" src="static/js/routie.js"></script>
