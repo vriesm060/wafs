@@ -12,15 +12,21 @@
 		<ul>
 			<li><a href="#home">Home</a></li>
 			<li><a href="#anime">Anime</a></li>
-			<li><a href="#episodes">Episodes</a></li>
 		</ul>
 	</nav>
 
 	<section id="home" class="active">
-		<h1>Home</h1>
+		<button type="button" id="sort">
+			Sort by rank
+		</button>
 
 		<ul id="anime-shows">
-			<li><a data-bind="title" href="#details"></a></li>
+			<li>
+				<a data-bind="link" href="#details">
+					<img data-bind="posterImage">
+					<h1 data-bind="title"></h1>
+				</a>
+			</li>
 		</ul>
 	</section>
 
@@ -28,14 +34,16 @@
 		<h1>Anime</h1>
 	</section>
 
-	<section id="episodes">
-		<h1>Episodes</h1>
+	<section id="details">
+		<article>
+			<img data-bind="coverImage">
+			<h1 data-bind="title"></h1>
+			<p data-bind="synopsis"></p>
+		</article>
 	</section>
 
-	<section id="details">
-		<img data-bind="posterImage">
-		<h1 data-bind="title"></h1>
-		<p data-bind="synopsis"></p>
+	<section id="error">
+		<h1>Error</h1>
 	</section>
 
 	<script type="text/javascript" src="static/js/routie.js"></script>
