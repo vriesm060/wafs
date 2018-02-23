@@ -33,11 +33,8 @@ Ik heb een app gemaakt die anime series laat zien. De gebruiker kan sorteren op 
 
 ## Sources
 
-*Anime API:*
-[](https://kitsu.docs.apiary.io/#)
+[Anime API](https://kitsu.docs.apiary.io/#)
 
-*Routie.js:*
-[](http://projects.jga.me/routie/)
+[Routie.js](http://projects.jga.me/routie/)
 
-*Transparency.js:*
-[](https://github.com/leonidas/transparency)
+[Transparency.js](https://github.com/leonidas/transparency)
