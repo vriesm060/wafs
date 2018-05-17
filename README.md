@@ -2,17 +2,17 @@
 
 [App](https://vriesm060.github.io/wafs/app)
 
-![App preview](preview.png)
+![App preview](screenshots/preview.png)
 
 Ik heb een app gemaakt die anime series laat zien. De gebruiker kan sorteren op populariteit en kan per serie de details bekijken in een detail sectie. De [data](https://kitsu.docs.apiary.io/#) voor deze app wordt asynchroon geladen, waarna het gemanipuleerd wordt aan de hand van wat de gebruiker er mee wilt doen.
 
 ## Object Method Diagram
 
-![Object Method Diagram](flow.png)
+![Object Method Diagram](screenshots/flow.png)
 
 ## Flow
 
-![Flow](object-method-diagram.png)
+![Flow](screenshots/object-method-diagram.png)
 
 ## Features
 
