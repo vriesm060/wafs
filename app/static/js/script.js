@@ -24,7 +24,7 @@
 			api.getData();
 
 			routie({
-				'home': function () {
+				'': function () {
 					templates.toggle('#home');
 				},
 				'anime': function () {
@@ -73,7 +73,6 @@
 				.catch(function (err) {
 					// Handle errors:
 					console.log(err);
-					
 				});
 		}
 	};
