@@ -29,8 +29,8 @@
 					templates.toggle('#anime');
 				},
 				'details/:slug': function (slug) {
+					api.getDetails(slug);
 					templates.toggle('#details');
-					collection.getDetails(slug);
 				},
 				'error': function () {
 					templates.toggle('#error');
@@ -60,12 +60,23 @@
 					return res.json();
 				})
 				.then(function (res, err) {
-
-					console.log(res);
-
 					// Render the overview:
-					templates.render(res);
+					templates.render(res.data);
+				})
+				.catch(function (err) {
+					// Handle errors:
+					console.log(err);
+				});
+		},
+		getDetails: function (slug) {
+			var url = `https://kitsu.io/api/edge/anime?filter[slug]=${slug}`;
 
+			return fetch (url)
+				.then(function (res, err) {
+					return res.json();
+				})
+				.then(function (res, err) {
+					templates.renderDetail(res.data[0]);
 				})
 				.catch(function (err) {
 					// Handle errors:
