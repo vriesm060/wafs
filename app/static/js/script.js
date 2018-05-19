@@ -43,11 +43,16 @@
 
 	var api = {
 		getData: function () {
-			return fetch ('https://kitsu.io/api/edge/anime')
+			return fetch ('https://kitsu.io/api/edge/anime?fields[anime]=slug,canonicalTitle,posterImage&page[limit]=20&page[offset]=0')
+			// https://kitsu.io/api/edge/anime
+			// https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D=0
+			// https://kitsu.io/api/edge/anime/1
 				.then(function (res, err) {
 					return res.json();
 				})
 				.then(function (res, err) {
+
+					console.log(res);
 
 					var map = res.data.map(function (item) {
 						return {
