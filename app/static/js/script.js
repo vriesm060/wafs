@@ -5,7 +5,6 @@
 
 	var app = {
 		init: function () {
-
 			// Show loader:
 			utils.loader.show();
 
@@ -38,10 +37,6 @@
 			});
 		}
 	};
-
-	// https://kitsu.io/api/edge/anime
-	// https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D=0
-	// https://kitsu.io/api/edge/anime/1
 
 	var api = {
 		headers: {
@@ -86,13 +81,6 @@
 	};
 
 	var collection = {
-		storeData: [],
-		getDetails: function (slug) {
-			var details = this.storeData.filter(function (item) {
-				if (item.attributes.slug === slug) return item;
-			});
-			templates.renderDetail(details);
-		},
 		sortByRank: function () {
 			var sort = this.storeData.sort(function (a, b) {
 				return a.attributes.popularityRank - b.attributes.popularityRank;
@@ -100,6 +88,8 @@
 			templates.render(sort);
 		}
 	};
+
+	// Add local storage somewhere
 
 	var templates = {
 		render: function (data) {
