@@ -5,12 +5,6 @@
 
 	var app = {
 		init: function () {
-			router.init();
-		}
-	};
-
-	var router = {
-		init: function () {
 
 			// Show loader:
 			utils.loader.show();
@@ -20,11 +14,15 @@
 				collection.sortByRank();
 			}, false);
 
-			// Get data:
-			api.getData();
+			router.init();
+		}
+	};
 
+	var router = {
+		init: function () {
 			routie({
 				'': function () {
+					api.getAnime();
 					templates.toggle('#home');
 				},
 				'anime': function () {
@@ -41,12 +39,23 @@
 		}
 	};
 
+	// https://kitsu.io/api/edge/anime
+	// https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D=0
+	// https://kitsu.io/api/edge/anime/1
+
 	var api = {
-		getData: function () {
-			return fetch ('https://kitsu.io/api/edge/anime?fields[anime]=slug,canonicalTitle,posterImage&page[limit]=20&page[offset]=0')
-			// https://kitsu.io/api/edge/anime
-			// https://kitsu.io/api/edge/anime?page%5Blimit%5D=10&page%5Boffset%5D=0
-			// https://kitsu.io/api/edge/anime/1
+		headers: {
+			fieldset: [
+				'slug',
+				'canonicalTitle',
+				'posterImage'
+			],
+			pageLimit: 20
+		},
+		getAnime: function () {
+			var url = `https://kitsu.io/api/edge/anime?fields[anime]=${this.headers.fieldset.join()}&page[limit]=${this.headers.pageLimit}&page[offset]=0`;
+
+			return fetch (url)
 				.then(function (res, err) {
 					return res.json();
 				})
@@ -54,25 +63,8 @@
 
 					console.log(res);
 
-					var map = res.data.map(function (item) {
-						return {
-							id: item.id,
-							attributes: {
-								'canonicalTitle': item.attributes.canonicalTitle,
-								'coverImage': item.attributes.coverImage,
-								'popularityRank': item.attributes.popularityRank,
-								'posterImage': item.attributes.posterImage,
-								'slug': item.attributes.slug,
-								'synopsis': item.attributes.synopsis
-							}
-						}
-					});
-
-					// Store the data in the storeData array in collection:
-					collection.storeData = map;
-
 					// Render the overview:
-					templates.render(map);
+					templates.render(res);
 
 				})
 				.catch(function (err) {
