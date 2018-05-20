@@ -28,7 +28,7 @@
 				'': function () {
 
 					// Remove data from localStorage for dev:
-					// localStorage.removeItem('anime');
+					localStorage.removeItem('anime');
 
 					if (localStorage.getItem('anime') !== null) {
 						var storage = JSON.parse(localStorage.getItem('anime'));
@@ -96,9 +96,14 @@
 					return res.json();
 				})
 				.then(function (res, err) {
-					// Render the overview:
+					// Add the data to localStorage:
 					localStorage.setItem('anime', JSON.stringify(res));
+
+					// Render the overview:
 					templates.render(res.data);
+
+					// Add the length of the data to headers.pageOffset:
+					api.headers.pageOffset += res.data.length;
 				})
 				.catch(function (err) {
 					// Handle errors:
