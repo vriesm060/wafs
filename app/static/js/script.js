@@ -10,7 +10,10 @@
 
 			// Activate sort button:
 			utils.sortButton.el.addEventListener('click', function () {
-				collection.sortByRank();
+				var sort = JSON.parse(localStorage.getItem('anime')).data.sort(function (a, b) {
+					return a.attributes.popularityRank - b.attributes.popularityRank;
+				});
+				templates.render(sort);
 			}, false);
 
 			// Activate more button:
@@ -126,16 +129,6 @@
 				});
 		}
 	};
-
-	// Temporary unavailable:
-	// var collection = {
-	// 	sortByRank: function () {
-	// 		var sort = this.storeData.sort(function (a, b) {
-	// 			return a.attributes.popularityRank - b.attributes.popularityRank;
-	// 		});
-	// 		templates.render(sort);
-	// 	}
-	// };
 
 	var templates = {
 		render: function (data) {
