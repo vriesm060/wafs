@@ -23,7 +23,19 @@
 
 			// Activate anime searchbar:
 			utils.searchAnime.el.addEventListener('input', function (e) {
-				console.log(this.value);
+				var self = this;
+				console.log(self.value);
+
+				var search = JSON.parse(localStorage.getItem('anime')).data.filter(function (item) {
+					if (item.attributes.canonicalTitle.toLowerCase().includes(self.value.toLowerCase())) {
+						return item;
+					}
+				});
+
+				console.log(search);
+
+				templates.render(search);
+
 				e.preventDefault();
 			}, false);
 
