@@ -21,14 +21,47 @@
 		init: function () {
 			routie({
 				'': function () {
-					api.getAnime();
+
+					// Remove data from localStorage for dev:
+					// localStorage.removeItem('anime');
+
+					if (localStorage.getItem('anime') !== null) {
+						var storage = JSON.parse(localStorage.getItem('anime'));
+						templates.render(storage.data);
+					} else {
+						api.getAnime();
+					}
+
 					templates.toggle('#home');
 				},
-				'anime': function () {
-					templates.toggle('#anime');
+				'manga': function () {
+					templates.toggle('#manga');
 				},
 				'details/:slug': function (slug) {
-					api.getDetails(slug);
+
+					// Find a better way to do this..
+					var anime = function () {
+						if (localStorage.getItem('anime') === null) {
+							return;
+						} else {
+							var storage = JSON.parse(localStorage.getItem('anime'));
+
+							return storage.data.filter(function (item) {
+								if (item.attributes.slug === slug) {
+									return item;
+								}
+							});
+						}
+					}
+
+					if (anime() !== undefined && anime().length > 0) {
+						templates.renderDetail(anime()[0]);
+						console.log('rendered through localStorage');
+					} else {
+						api.getDetails(slug);
+						console.log('rendered through API call');
+					}
+
 					templates.toggle('#details');
 				},
 				'error': function () {
@@ -43,7 +76,9 @@
 			fieldset: [
 				'slug',
 				'canonicalTitle',
-				'posterImage'
+				'posterImage',
+				'coverImage',
+				'synopsis'
 			],
 			pageLimit: 20
 		},
@@ -56,6 +91,7 @@
 				})
 				.then(function (res, err) {
 					// Render the overview:
+					localStorage.setItem('anime', JSON.stringify(res));
 					templates.render(res.data);
 				})
 				.catch(function (err) {
@@ -64,7 +100,7 @@
 				});
 		},
 		getDetails: function (slug) {
-			var url = `https://kitsu.io/api/edge/anime?filter[slug]=${slug}`;
+			var url = `https://kitsu.io/api/edge/anime?filter[slug]=${slug}&fields[anime]=${this.headers.fieldset.join()}`;
 
 			return fetch (url)
 				.then(function (res, err) {
@@ -80,14 +116,15 @@
 		}
 	};
 
-	var collection = {
-		sortByRank: function () {
-			var sort = this.storeData.sort(function (a, b) {
-				return a.attributes.popularityRank - b.attributes.popularityRank;
-			});
-			templates.render(sort);
-		}
-	};
+	// Temporary unavailable:
+	// var collection = {
+	// 	sortByRank: function () {
+	// 		var sort = this.storeData.sort(function (a, b) {
+	// 			return a.attributes.popularityRank - b.attributes.popularityRank;
+	// 		});
+	// 		templates.render(sort);
+	// 	}
+	// };
 
 	// Add local storage somewhere
 
@@ -113,7 +150,15 @@
 		renderDetail: function (data) {
 			var directives = {
 				coverImage: {
-					src: function () { return this.attributes.coverImage.large; }
+					src: function () {
+						if (this.attributes.coverImage !== null) {
+							return this.attributes.coverImage.large;
+						} else if (this.attributes.posterImage !== null) {
+							return this.attributes.posterImage.large;
+						} else {
+							return;
+						}
+					}
 				},
 				title: {
 					text: function () { return this.attributes.canonicalTitle; }
