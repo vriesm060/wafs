@@ -85,10 +85,11 @@
 				'coverImage',
 				'synopsis'
 			],
-			pageLimit: 20
+			pageLimit: 20,
+			pageOffset: 0
 		},
 		getAnime: function () {
-			var url = `https://kitsu.io/api/edge/anime?fields[anime]=${this.headers.fieldset.join()}&page[limit]=${this.headers.pageLimit}&page[offset]=0`;
+			var url = `https://kitsu.io/api/edge/anime?fields[anime]=${this.headers.fieldset.join()}&page[limit]=${this.headers.pageLimit}&page[offset]=${this.headers.pageOffset}`;
 
 			return fetch (url)
 				.then(function (res, err) {
