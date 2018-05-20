@@ -29,7 +29,6 @@
 		init: function () {
 			routie({
 				'': function () {
-
 					// Remove data from localStorage for dev:
 					localStorage.removeItem('anime');
 
@@ -110,7 +109,8 @@
 				})
 				.catch(function (err) {
 					// Handle errors:
-					console.log(err);
+					templates.renderError(err.toString());
+					routie('error');
 				});
 		},
 		getDetails: function (slug) {
@@ -121,11 +121,17 @@
 					return res.json();
 				})
 				.then(function (res, err) {
-					templates.renderDetail(res.data[0]);
+					if (res.data.length) {
+						templates.renderDetail(res.data[0]);
+					} else {
+						templates.renderError('No anime found.');
+						routie('error');
+					}
 				})
 				.catch(function (err) {
 					// Handle errors:
-					console.log(err);
+					templates.renderError(err.toString());
+					routie('error');
 				});
 		}
 	};
@@ -171,6 +177,15 @@
 			}
 
 			Transparency.render(document.querySelector('#details'), data, directives);
+		},
+		renderError: function (msg) {
+			var directives = {
+				errorMsg: {
+					text: function () { return this.value; }
+				}
+			}
+
+			Transparency.render(document.querySelector('#error'), msg, directives);
 		},
 		toggle: function (route) {
 			var section = document.querySelectorAll('section');
