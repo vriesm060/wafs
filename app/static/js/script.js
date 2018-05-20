@@ -13,6 +13,11 @@
 				collection.sortByRank();
 			}, false);
 
+			// Activate more button:
+			utils.moreButton.el.addEventListener('click', function () {
+				// Some action
+			}, false);
+
 			router.init();
 		}
 	};
@@ -196,6 +201,9 @@
 		},
 		sortButton: {
 			el: document.querySelector('#sort')
+		},
+		moreButton: {
+			el: document.querySelector('#more')
 		}
 	};
 
