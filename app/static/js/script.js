@@ -21,6 +21,12 @@
 				// api.getAnime();
 			}, false);
 
+			// Activate anime searchbar:
+			utils.searchAnime.el.addEventListener('input', function (e) {
+				console.log(this.value);
+				e.preventDefault();
+			}, false);
+
 			router.init();
 		}
 	};
@@ -216,6 +222,9 @@
 		},
 		moreButton: {
 			el: document.querySelector('#more')
+		},
+		searchAnime: {
+			el: document.querySelector('[name="search-anime"]')
 		}
 	};
 
