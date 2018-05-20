@@ -15,7 +15,7 @@
 
 			// Activate more button:
 			utils.moreButton.el.addEventListener('click', function () {
-				// Some action
+				// api.getAnime();
 			}, false);
 
 			router.init();
@@ -136,8 +136,6 @@
 	// 		templates.render(sort);
 	// 	}
 	// };
-
-	// Add local storage somewhere
 
 	var templates = {
 		render: function (data) {
