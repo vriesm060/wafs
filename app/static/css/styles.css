@@ -82,7 +82,7 @@
 ====================
 */
 
-	#sort {
+	button {
 		display: block;
 		width: auto;
 		height: 3.125rem;
@@ -100,8 +100,8 @@
 		text-align: center;
 	}
 
-	#sort:hover,
-	#sort:focus {
+	button:hover,
+	button:focus {
 		background-color: var(--primary-color);
 	}
 
