@@ -13,30 +13,32 @@ import utils from './utils.js';
 			utils.loader.show();
 
 			// Activate sort button:
-			// utils.sortButton.el.addEventListener('click', function () {
+			// utils.sortButton.el.addEventListener('click', function (e) {
 			// 	var sort = JSON.parse(localStorage.getItem('anime')).data.sort(function (a, b) {
 			// 		return a.attributes.popularityRank - b.attributes.popularityRank;
 			// 	});
 			// 	templates.render(sort);
+			// 	e.preventDefault();
 			// }, false);
 
 			// Activate anime searchbar:
-			// utils.searchAnime.el.addEventListener('input', function (e) {
-			// 	var self = this;
-			// 	console.log(self.value);
-			//
-			// 	var search = JSON.parse(localStorage.getItem('anime')).data.filter(function (item) {
-			// 		if (item.attributes.canonicalTitle.toLowerCase().includes(self.value.toLowerCase())) {
-			// 			return item;
-			// 		}
-			// 	});
-			//
-			// 	console.log(search);
-			//
-			// 	templates.render(search);
-			//
-			// 	e.preventDefault();
-			// }, false);
+
+			utils.searchInputs.el.forEach(function (el) {
+				el.addEventListener('input', function (e) {
+					var self = this;
+					var type = self.parentNode.parentNode.id;
+
+					var search = JSON.parse(localStorage.getItem(type)).filter(function (item) {
+						if (item.attributes.canonicalTitle.toLowerCase().includes(self.value.toLowerCase())) {
+							return item;
+						}
+					});
+
+					templates.renderOverview(type, search);
+
+					e.preventDefault();
+				}, false);
+			});
 
 			router.init();
 		}
