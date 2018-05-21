@@ -1,6 +1,6 @@
 # Web App from Scratch | Anime/Manga App
 
-![Preview](screenshots/preview.png)
+![Preview](screenshots/preview2.png)
 
 [Demo](https://vriesm060.github.io/wafs/app)
 
