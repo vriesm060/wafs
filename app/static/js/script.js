@@ -1,7 +1,6 @@
 'use strict';
 
 import router from './router.js';
-import api from './api.js';
 import templates from './templates.js';
 import utils from './utils.js';
 
@@ -9,9 +8,6 @@ import utils from './utils.js';
 
 	var app = {
 		init: function () {
-			// Show loader:
-			utils.loader.show();
-
 			// Activate sort buttons:
 			utils.sortButtons.el.forEach(function (el) {
 				el.addEventListener('click', function (e) {
@@ -29,7 +25,6 @@ import utils from './utils.js';
 			});
 
 			// Activate searchbars:
-
 			utils.searchInputs.el.forEach(function (el) {
 				el.addEventListener('input', function (e) {
 					var self = this;
