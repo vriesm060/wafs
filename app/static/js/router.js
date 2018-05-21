@@ -19,7 +19,7 @@ var router = {
         // api.headers.pageOffset += data.length;
 
         // Render the overview:
-        templates.render('anime', anime.data);
+        templates.renderOverview('anime', anime.data);
         templates.toggle('#anime');
       },
       'manga': async function () {
@@ -37,7 +37,7 @@ var router = {
         // api.headers.pageOffset += data.length;
 
         // Render the overview:
-        templates.render('manga', manga.data);
+        templates.renderOverview('manga', manga.data);
         templates.toggle('#manga');
       },
       'details/:slug': function (slug) {

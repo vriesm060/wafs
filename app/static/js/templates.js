@@ -1,7 +1,7 @@
 import utils from './utils.js';
 
 var templates = {
-  render: function (type, data) {
+  renderOverview: function (type, data) {
     var directives = {
       link: {
         href: function (params) { return params.value + '/' + this.attributes.slug; }
