@@ -4,47 +4,66 @@ import api from './api.js';
 var router = {
   init: function () {
     routie({
-      '': function () {
-        // Remove data from localStorage for dev:
+      '': async function () {
+        // Remove data temporary from localStorage for dev:
         localStorage.removeItem('anime');
 
-        if (localStorage.getItem('anime') !== null) {
-          var storage = JSON.parse(localStorage.getItem('anime'));
-          templates.render(storage.data);
-        } else {
-          api.getAnime();
-        }
+        var anime = await api.getData('anime');
 
-        templates.toggle('#home');
+        console.log('anime', anime);
+
+        // Add the data to localStorage:
+        localStorage.setItem('anime', JSON.stringify(anime.data));
+
+        // Add the length of the data to headers.pageOffset:
+        // api.headers.pageOffset += data.length;
+
+        // Render the overview:
+        templates.renderOverview('anime', anime.data);
+        templates.toggle('#anime');
       },
-      'manga': function () {
+      'manga': async function () {
+        // Remove data temporary from localStorage for dev:
+        localStorage.removeItem('manga');
+
+        var manga = await api.getData('manga');
+
+        console.log('manga', manga);
+
+        // Add the data to localStorage:
+        localStorage.setItem('manga', JSON.stringify(manga.data));
+
+        // Add the length of the data to headers.pageOffset:
+        // api.headers.pageOffset += data.length;
+
+        // Render the overview:
+        templates.renderOverview('manga', manga.data);
         templates.toggle('#manga');
       },
-      'details/:slug': function (slug) {
+      'details/:type/:slug': async function (type, slug) {
+        var detail;
 
-        // Find a better way to do this..
-        var anime = function () {
-          if (localStorage.getItem('anime') === null) {
-            return;
+        if (localStorage.getItem(type)) {
+          console.log(`${type} is in storage`);
+          var storage = JSON.parse(localStorage.getItem(type));
+
+          storage = storage.filter(function (item) {
+            if (item.attributes.slug === slug) {
+              return item;
+            }
+          });
+
+          if (storage.length) {
+            detail = storage[0];
           } else {
-            var storage = JSON.parse(localStorage.getItem('anime'));
-
-            return storage.data.filter(function (item) {
-              if (item.attributes.slug === slug) {
-                return item;
-              }
-            });
+            detail = await api.getDetails(type, slug);
           }
-        }
-
-        if (anime() !== undefined && anime().length > 0) {
-          templates.renderDetail(anime()[0]);
-          console.log('rendered through localStorage');
         } else {
-          api.getDetails(slug);
-          console.log('rendered through API call');
+          console.log(`${type} is not in storage`);
+          detail = await api.getDetails(type, slug);
         }
 
+        templates.renderDetail(detail);
         templates.toggle('#details');
       },
       'error': function () {
