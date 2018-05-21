@@ -1,6 +1,7 @@
 var utils = {
   loader: {
     el: document.querySelector('.shows'),
+    // Change for all loaders:
     show: function () {
       this.el.classList.add('show');
     },
@@ -9,10 +10,10 @@ var utils = {
     }
   },
   sortButton: {
-    el: document.querySelector('.sort')
+    el: document.querySelectorAll('.sort')
   },
-  searchInput: {
-    el: document.querySelector('[name="search"]')
+  searchInputs: {
+    el: document.querySelectorAll('[name="search"]')
   }
 };
 
