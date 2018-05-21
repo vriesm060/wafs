@@ -1,10 +1,14 @@
-import templates from './templates.js';
 import api from './api.js';
+import templates from './templates.js';
+import utils from './utils.js';
 
 var router = {
   init: function () {
     routie({
       '': async function () {
+        // Show loader:
+  			utils.loader.show();
+
         // Remove data temporary from localStorage for dev:
         localStorage.removeItem('anime');
 
@@ -21,8 +25,14 @@ var router = {
         // Render the overview:
         templates.renderOverview('anime', anime.data);
         templates.toggle('#anime');
+
+        // Hide loader:
+        utils.loader.hide();
       },
       'manga': async function () {
+        // Show loader:
+        utils.loader.show();
+
         // Remove data temporary from localStorage for dev:
         localStorage.removeItem('manga');
 
@@ -39,6 +49,9 @@ var router = {
         // Render the overview:
         templates.renderOverview('manga', manga.data);
         templates.toggle('#manga');
+
+        // Hide loader:
+        utils.loader.hide();
       },
       'details/:type/:slug': async function (type, slug) {
         var detail;
