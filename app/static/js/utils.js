@@ -9,7 +9,7 @@ var utils = {
       this.el.classList.remove('show');
     }
   },
-  sortButton: {
+  sortButtons: {
     el: document.querySelectorAll('.sort')
   },
   searchInputs: {
