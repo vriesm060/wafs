@@ -40,34 +40,30 @@ var router = {
         templates.renderOverview('manga', manga.data);
         templates.toggle('#manga');
       },
-      'details/:type/:slug': function (type, slug) {
+      'details/:type/:slug': async function (type, slug) {
+        var detail;
 
-        if (localStorage.length) {
-          
+        if (localStorage.getItem(type)) {
+          console.log(`${type} is in storage`);
+          var storage = JSON.parse(localStorage.getItem(type));
+
+          storage = storage.filter(function (item) {
+            if (item.attributes.slug === slug) {
+              return item;
+            }
+          });
+
+          if (storage.length) {
+            detail = storage[0];
+          } else {
+            detail = await api.getDetails(type, slug);
+          }
+        } else {
+          console.log(`${type} is not in storage`);
+          detail = await api.getDetails(type, slug);
         }
 
-        // var anime = function () {
-        //   if (localStorage.getItem('anime') === null) {
-        //     return;
-        //   } else {
-        //     var storage = JSON.parse(localStorage.getItem('anime'));
-        //
-        //     return storage.data.filter(function (item) {
-        //       if (item.attributes.slug === slug) {
-        //         return item;
-        //       }
-        //     });
-        //   }
-        // }
-        //
-        // if (anime() !== undefined && anime().length > 0) {
-        //   templates.renderDetail(anime()[0]);
-        //   console.log('rendered through localStorage');
-        // } else {
-        //   api.getDetails(slug);
-        //   console.log('rendered through API call');
-        // }
-
+        templates.renderDetail(detail);
         templates.toggle('#details');
       },
       'error': function () {
