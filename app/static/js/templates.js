@@ -1,7 +1,7 @@
 import utils from './utils.js';
 
 var templates = {
-  render: function (data) {
+  render: function (type, data) {
     var directives = {
       link: {
         href: function (params) { return params.value + '/' + this.attributes.slug; }
@@ -14,7 +14,7 @@ var templates = {
       }
     }
 
-    Transparency.render(document.querySelector('#anime-shows'), data, directives);
+    Transparency.render(document.querySelector(`#${type}-shows`), data, directives);
 
     // Hide loader:
     utils.loader.hide();
