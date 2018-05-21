@@ -11,6 +11,9 @@ var templates = {
       },
       title: {
         text: function () { return this.attributes.canonicalTitle; }
+      },
+      rank: {
+        text: function (params) { return params.value + this.attributes.popularityRank; }
       }
     }
 
