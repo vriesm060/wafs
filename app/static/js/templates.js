@@ -4,7 +4,7 @@ var templates = {
   renderOverview: function (type, data) {
     var directives = {
       link: {
-        href: function (params) { return params.value + '/' + this.attributes.slug; }
+        href: function (params) { return `${params.value}/${type}/${this.attributes.slug}`; }
       },
       posterImage: {
         src: function () { return this.attributes.posterImage.small; }
