@@ -1,40 +1,54 @@
-# Web App from Scratch | Max de Vries
+# Web App from Scratch | Anime/Manga App
 
-[App](https://vriesm060.github.io/wafs/app)
+![Preview](screenshots/preview.png)
 
-![App preview](screenshots/preview.png)
+[Demo](https://vriesm060.github.io/wafs/app)
 
-Ik heb een app gemaakt die anime series laat zien. De gebruiker kan sorteren op populariteit en kan per serie de details bekijken in een detail sectie. De [data](https://kitsu.docs.apiary.io/#) voor deze app wordt asynchroon geladen, waarna het gemanipuleerd wordt aan de hand van wat de gebruiker er mee wilt doen.
+Ik heb een app gemaakt die anime series laat zien. De gebruiker kan sorteren op populariteit en kan per serie de details bekijken in een detail sectie. De [data](https://kitsu.docs.apiary.io/) voor deze app wordt asynchroon geladen, waarna het gemanipuleerd wordt aan de hand van wat de gebruiker er mee wilt doen.
 
-## Object Method Diagram
+## Table of Contents
 
-![Object Method Diagram](screenshots/flow.png)
+* [Frameworks](#frameworks)
+* [Installation](#installation)
+* [API](#api)
+* [Features](#features)
+* [Usage](#usage)
 
-## Flow
+## Frameworks
 
-![Flow](screenshots/object-method-diagram.png)
+* [Routie.js](http://projects.jga.me/routie/)
+* [Transparency.js](https://github.com/leonidas/transparency)
+
+## Installation
+
+Tell other users how to install your project locally.
+
+## API
 
 ## Features
 
-* Anime API
-* Routie om tussen de verschillende pagina's te navigeren
-* Loader om feedback te geven aan de gebruiker dat de API geladen wordt
-* Sorteer optie om de data te sorteren op volgorde van rank
-* Transparency template engine om de data te renderen in de HTML
-* Overzichtspagina met alle anime
-* Detailpagina met meer informatie over de anime
+* [x] Anime API
+* [x] Routie om tussen de verschillende pagina's te navigeren
+* [x] Loader om feedback te geven aan de gebruiker dat de API geladen wordt
+* [x] Sorteer optie om de data te sorteren op volgorde van rank
+* [x] Transparency template engine om de data te renderen in de HTML
+* [x] Overzichtspagina met alle anime
+* [x] Detailpagina met meer informatie over de anime
+* [ ] Filter optie om de data te kunnen filteren op bijvoorbeeld genre
+* [ ] Meer data kunnen inladen uit de API
+* [ ] Verschillende datasets kunnen combineren om meer informatie te kunnen geven
+* [ ] Een sectie waar de gebruiker zijn/haar eigen selectie kan terug vinden.
 
-## Wishlist
+## Usage
 
-* Filter optie om de data te kunnen filteren op bijvoorbeeld genre
-* Meer data kunnen inladen uit de API
-* Verschillende datasets kunnen combineren om meer informatie te kunnen geven
-* Een sectie waar de gebruiker zijn/haar eigen selectie kan terug vinden.
+Instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
 
-## Sources
+### Object Method Diagram
+---
 
-[Anime API](https://kitsu.docs.apiary.io/#)
+![Object Method Diagram](screenshots/flow.png)
 
-[Routie.js](http://projects.jga.me/routie/)
+### Flow
+---
 
-[Transparency.js](https://github.com/leonidas/transparency)
+![Flow](screenshots/object-method-diagram.png)
