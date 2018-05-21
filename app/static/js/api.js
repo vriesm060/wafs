@@ -14,32 +14,27 @@ var api = {
     pageOffset: 0
   },
   getData: async function (type) {
-    var url = `https://kitsu.io/api/edge/${type}?fields[${type}]=${this.headers.fieldset.join()}&page[limit]=${this.headers.pageLimit}&page[offset]=${this.headers.pageOffset}`;
-
-    return await fetch (url)
+    return await fetch (`https://kitsu.io/api/edge/${type}?fields[${type}]=${this.headers.fieldset.join()}&page[limit]=${this.headers.pageLimit}&page[offset]=${this.headers.pageOffset}`)
       .then((res, err) => res.json())
-      .catch(function (err) {
+      .catch(err => {
         // Handle errors:
         templates.renderError(err.toString());
         routie('error');
       });
   },
   getDetails: async function (type, slug) {
-    var url = `https://kitsu.io/api/edge/${type}?filter[slug]=${slug}&fields[${type}]=${this.headers.fieldset.join()}`;
-
-    return await fetch (url)
-      .then(function (res, err) {
-        return res.json();
-      })
-      .then(function (res, err) {
+    return await fetch (`https://kitsu.io/api/edge/${type}?fields[${type}]=${this.headers.fieldset.join()}&filter[slug]=${slug}`)
+      .then((res, err) => { return res.json(); })
+      .then((res, err) => {
         if (res.data.length) {
           return res.data;
         } else {
-          templates.renderError('No anime found.');
+          // When there are no matches:
+          templates.renderError(`No ${type} found.`);
           routie('error');
         }
       })
-      .catch(function (err) {
+      .catch(err => {
         // Handle errors:
         templates.renderError(err.toString());
         routie('error');

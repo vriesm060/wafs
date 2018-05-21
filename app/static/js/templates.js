@@ -21,9 +21,9 @@ var templates = {
     var directives = {
       coverImage: {
         src: function () {
-          if (this.attributes.coverImage !== null) {
+          if (this.attributes.coverImage) {
             return this.attributes.coverImage.large;
-          } else if (this.attributes.posterImage !== null) {
+          } else if (this.attributes.posterImage) {
             return this.attributes.posterImage.large;
           } else {
             return;

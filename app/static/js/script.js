@@ -14,12 +14,12 @@ import utils from './utils.js';
 					var self = this;
 					var type = self.parentNode.parentNode.id;
 
+					// Sort the data by rank:
 					var sort = JSON.parse(localStorage.getItem(type)).sort(function (a, b) {
 						return a.attributes.popularityRank - b.attributes.popularityRank;
 					});
 
 					templates.renderOverview(type, sort);
-
 					e.preventDefault();
 				}, false);
 			});
@@ -30,6 +30,7 @@ import utils from './utils.js';
 					var self = this;
 					var type = self.parentNode.parentNode.id;
 
+					// Search within the data:
 					var search = JSON.parse(localStorage.getItem(type)).filter(function (item) {
 						if (item.attributes.canonicalTitle.toLowerCase().includes(self.value.toLowerCase())) {
 							return item;
@@ -37,7 +38,6 @@ import utils from './utils.js';
 					});
 
 					templates.renderOverview(type, search);
-
 					e.preventDefault();
 				}, false);
 			});
