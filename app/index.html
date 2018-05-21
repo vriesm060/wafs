@@ -8,30 +8,51 @@
 </head>
 <body>
 
+	<div class="loader"></div>
+
 	<nav class="site-nav">
 		<ul>
-			<li><a href="#home">Home</a></li>
-			<li><a href="#anime">Anime</a></li>
+			<li><a href="index.html">Anime</a></li>
+			<li><a href="#manga">Manga</a></li>
 		</ul>
 	</nav>
 
-	<section id="home" class="active">
-		<button type="button" id="sort">
-			Sort by rank
-		</button>
+	<section id="anime" class="active">
+		<form class="options">
+			<button type="button" class="sort">Sort by rank</button>
+			<input type="text" name="search" placeholder="Zoek een Anime" value="">
+		</form>
 
-		<ul id="anime-shows">
+		<ul id="anime-shows" class="shows">
 			<li>
 				<a data-bind="link" href="#details">
 					<img data-bind="posterImage">
-					<h1 data-bind="title"></h1>
+					<article>
+						<h1 data-bind="title"></h1>
+						<h2 data-bind="rank">Rank: </h2>
+					</article>
 				</a>
 			</li>
 		</ul>
 	</section>
 
-	<section id="anime">
-		<h1>Anime</h1>
+	<section id="manga">
+		<form class="options">
+			<button type="button" class="sort">Sort by rank</button>
+			<input type="text" name="search" placeholder="Zoek een Manga" value="">
+		</form>
+
+		<ul id="manga-shows" class="shows">
+			<li>
+				<a data-bind="link" href="#details">
+					<img data-bind="posterImage">
+					<article>
+						<h1 data-bind="title"></h1>
+						<h2 data-bind="rank">Rank: </h2>
+					</article>
+				</a>
+			</li>
+		</ul>
 	</section>
 
 	<section id="details">
@@ -44,10 +65,11 @@
 
 	<section id="error">
 		<h1>Error</h1>
+		<p data-bind="errorMsg"></p>
 	</section>
 
-	<script type="text/javascript" src="static/js/routie.js"></script>
-	<script type="text/javascript" src="static/js/transparency.min.js"></script>
-	<script type="text/javascript" src="static/js/script.js"></script>
+	<script type="text/javascript" src="static/js/libs/routie.js"></script>
+	<script type="text/javascript" src="static/js/libs/transparency.min.js"></script>
+	<script type="module" src="static/js/script.js"></script>
 </body>
 </html>
