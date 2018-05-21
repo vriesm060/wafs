@@ -15,7 +15,7 @@
 		</ul>
 	</nav>
 
-	<section id="home" class="active">
+	<section id="anime" class="active">
 		<button type="button" id="sort">
 			Sort by rank
 		</button>
@@ -26,7 +26,7 @@
 
 		<input type="text" name="search-anime" placeholder="Zoek een anime" value="">
 
-		<ul id="anime-shows">
+		<ul id="anime-shows" class="shows">
 			<li>
 				<a data-bind="link" href="#details">
 					<img data-bind="posterImage">
@@ -37,7 +37,22 @@
 	</section>
 
 	<section id="manga">
-		<h1>Manga</h1>
+		<button type="button" id="sort">
+			Sort by rank
+		</button>
+
+		<button type="button" id="more">
+			More Manga
+		</button>
+
+		<ul id="manga-shows" class="shows">
+			<li>
+				<a data-bind="link" href="#details">
+					<img data-bind="posterImage">
+					<h1 data-bind="title"></h1>
+				</a>
+			</li>
+		</ul>
 	</section>
 
 	<section id="details">
