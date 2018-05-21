@@ -1,5 +1,3 @@
-import utils from './utils.js';
-
 var templates = {
   renderOverview: function (type, data) {
     var directives = {
@@ -18,9 +16,6 @@ var templates = {
     }
 
     Transparency.render(document.querySelector(`#${type}-shows`), data, directives);
-
-    // Hide loader:
-    utils.loader.hide();
   },
   renderDetail: function (data) {
     var directives = {
