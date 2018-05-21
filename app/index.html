@@ -10,21 +10,16 @@
 
 	<nav class="site-nav">
 		<ul>
-			<li><a href="index.html">Home</a></li>
+			<li><a href="index.html">Anime</a></li>
 			<li><a href="#manga">Manga</a></li>
 		</ul>
 	</nav>
 
 	<section id="anime" class="active">
-		<button type="button" id="sort">
-			Sort by rank
-		</button>
-
-		<button type="button" id="more">
-			More Anime
-		</button>
-
-		<input type="text" name="search-anime" placeholder="Zoek een anime" value="">
+		<form class="options">
+			<button type="button" id="sort">Sort by rank</button>
+			<input type="text" name="search" placeholder="Zoek een Anime" value="">
+		</form>
 
 		<ul id="anime-shows" class="shows">
 			<li>
@@ -37,13 +32,10 @@
 	</section>
 
 	<section id="manga">
-		<button type="button" id="sort">
-			Sort by rank
-		</button>
-
-		<button type="button" id="more">
-			More Manga
-		</button>
+		<form class="options">
+			<button type="button" id="sort">Sort by rank</button>
+			<input type="text" name="search" placeholder="Zoek een Manga" value="">
+		</form>
 
 		<ul id="manga-shows" class="shows">
 			<li>
