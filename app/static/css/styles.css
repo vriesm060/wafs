@@ -152,6 +152,7 @@ section.active {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
 	width: 100%;
+	list-style-type: none;
 }
 
 .shows.show::before {
@@ -173,16 +174,16 @@ section.active {
 	100% { transform: rotate(360deg); }
 }
 
-.shows li {
+.shows li a {
 	position: relative;
 	display: block;
 	overflow: hidden;
 	margin: var(--spacing-unit);
-	color: #000;
-	background-color: #fff;
+	color: var(--black-color);
+	text-decoration: none;
 	transition: all .3s ease-in-out;
 }
-.shows li:hover {
+.shows li a:hover {
 	transform: scale(1.05, 1.05);
 }
 
@@ -192,7 +193,7 @@ section.active {
 	height: auto;
 }
 
-.shows h1 {
+.shows article {
 	position: absolute;
 	left: 0;
 	bottom: var(--spacing-unit);
@@ -202,12 +203,20 @@ section.active {
 	padding: var(--spacing-unit);
 	color: #fff;
 	background-color: rgba(3,23,39,.8);
-	font-size: 1.25em;
 	transition: all .3s ease-in-out;
 }
-.shows li:hover h1 {
+.shows li a:hover article {
 	opacity: .7;
 	transform: translateX(-100%);
+}
+
+.shows h1 {
+	margin-bottom: calc(var(--spacing-unit) / 2);
+	font-size: 1.4em;
+}
+
+.shows h2 {
+	font-size: 1em;
 }
 
 /*
