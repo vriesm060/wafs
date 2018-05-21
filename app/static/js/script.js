@@ -12,16 +12,23 @@ import utils from './utils.js';
 			// Show loader:
 			utils.loader.show();
 
-			// Activate sort button:
-			// utils.sortButton.el.addEventListener('click', function (e) {
-			// 	var sort = JSON.parse(localStorage.getItem('anime')).data.sort(function (a, b) {
-			// 		return a.attributes.popularityRank - b.attributes.popularityRank;
-			// 	});
-			// 	templates.render(sort);
-			// 	e.preventDefault();
-			// }, false);
+			// Activate sort buttons:
+			utils.sortButtons.el.forEach(function (el) {
+				el.addEventListener('click', function (e) {
+					var self = this;
+					var type = self.parentNode.parentNode.id;
 
-			// Activate anime searchbar:
+					var sort = JSON.parse(localStorage.getItem(type)).sort(function (a, b) {
+						return a.attributes.popularityRank - b.attributes.popularityRank;
+					});
+
+					templates.renderOverview(type, sort);
+
+					e.preventDefault();
+				}, false);
+			});
+
+			// Activate searchbars:
 
 			utils.searchInputs.el.forEach(function (el) {
 				el.addEventListener('input', function (e) {
