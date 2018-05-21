@@ -4,20 +4,40 @@ import api from './api.js';
 var router = {
   init: function () {
     routie({
-      '': function () {
-        // Remove data from localStorage for dev:
+      '': async function () {
+        // Remove data temporary from localStorage for dev:
         localStorage.removeItem('anime');
 
-        if (localStorage.getItem('anime') !== null) {
-          var storage = JSON.parse(localStorage.getItem('anime'));
-          templates.render(storage.data);
-        } else {
-          api.getAnime();
-        }
+        var anime = await api.getData('anime');
 
-        templates.toggle('#home');
+        console.log('anime', anime);
+
+        // Add the data to localStorage:
+        localStorage.setItem('anime', JSON.stringify(anime.data));
+
+        // Add the length of the data to headers.pageOffset:
+        // api.headers.pageOffset += data.length;
+
+        // Render the overview:
+        templates.render('anime', anime.data);
+        templates.toggle('#anime');
       },
-      'manga': function () {
+      'manga': async function () {
+        // Remove data temporary from localStorage for dev:
+        localStorage.removeItem('manga');
+
+        var manga = await api.getData('manga');
+
+        console.log('manga', manga);
+
+        // Add the data to localStorage:
+        localStorage.setItem('manga', JSON.stringify(manga.data));
+
+        // Add the length of the data to headers.pageOffset:
+        // api.headers.pageOffset += data.length;
+
+        // Render the overview:
+        templates.render('manga', manga.data);
         templates.toggle('#manga');
       },
       'details/:slug': function (slug) {
