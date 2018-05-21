@@ -23,16 +23,16 @@ var api = {
         routie('error');
       });
   },
-  getDetails: function (slug) {
-    var url = `https://kitsu.io/api/edge/anime?filter[slug]=${slug}&fields[anime]=${this.headers.fieldset.join()}`;
+  getDetails: async function (type, slug) {
+    var url = `https://kitsu.io/api/edge/${type}?filter[slug]=${slug}&fields[${type}]=${this.headers.fieldset.join()}`;
 
-    return fetch (url)
+    return await fetch (url)
       .then(function (res, err) {
         return res.json();
       })
       .then(function (res, err) {
         if (res.data.length) {
-          templates.renderDetail(res.data[0]);
+          return res.data;
         } else {
           templates.renderError('No anime found.');
           routie('error');
