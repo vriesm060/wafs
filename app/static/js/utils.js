@@ -1,7 +1,6 @@
 var utils = {
   loader: {
-    el: document.querySelector('.shows'),
-    // Change for all loaders:
+    el: document.querySelector('.loader'),
     show: function () {
       this.el.classList.add('show');
     },
