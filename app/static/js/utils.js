@@ -1,6 +1,6 @@
 var utils = {
   loader: {
-    el: document.querySelector('#anime-shows'),
+    el: document.querySelector('.loader'),
     show: function () {
       this.el.classList.add('show');
     },
@@ -8,14 +8,11 @@ var utils = {
       this.el.classList.remove('show');
     }
   },
-  sortButton: {
-    el: document.querySelector('#sort')
+  sortButtons: {
+    el: document.querySelectorAll('.sort')
   },
-  moreButton: {
-    el: document.querySelector('#more')
-  },
-  searchAnime: {
-    el: document.querySelector('[name="search-anime"]')
+  searchInputs: {
+    el: document.querySelectorAll('[name="search"]')
   }
 };
 

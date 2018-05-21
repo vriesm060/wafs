@@ -1,7 +1,6 @@
 'use strict';
 
 import router from './router.js';
-import api from './api.js';
 import templates from './templates.js';
 import utils from './utils.js';
 
@@ -9,34 +8,39 @@ import utils from './utils.js';
 
 	var app = {
 		init: function () {
-			// Show loader:
-			utils.loader.show();
+			// Activate sort buttons:
+			utils.sortButtons.el.forEach(function (el) {
+				el.addEventListener('click', function (e) {
+					var self = this;
+					var type = self.parentNode.parentNode.id;
 
-			// Activate sort button:
-			// utils.sortButton.el.addEventListener('click', function () {
-			// 	var sort = JSON.parse(localStorage.getItem('anime')).data.sort(function (a, b) {
-			// 		return a.attributes.popularityRank - b.attributes.popularityRank;
-			// 	});
-			// 	templates.render(sort);
-			// }, false);
+					var sort = JSON.parse(localStorage.getItem(type)).sort(function (a, b) {
+						return a.attributes.popularityRank - b.attributes.popularityRank;
+					});
 
-			// Activate anime searchbar:
-			// utils.searchAnime.el.addEventListener('input', function (e) {
-			// 	var self = this;
-			// 	console.log(self.value);
-			//
-			// 	var search = JSON.parse(localStorage.getItem('anime')).data.filter(function (item) {
-			// 		if (item.attributes.canonicalTitle.toLowerCase().includes(self.value.toLowerCase())) {
-			// 			return item;
-			// 		}
-			// 	});
-			//
-			// 	console.log(search);
-			//
-			// 	templates.render(search);
-			//
-			// 	e.preventDefault();
-			// }, false);
+					templates.renderOverview(type, sort);
+
+					e.preventDefault();
+				}, false);
+			});
+
+			// Activate searchbars:
+			utils.searchInputs.el.forEach(function (el) {
+				el.addEventListener('input', function (e) {
+					var self = this;
+					var type = self.parentNode.parentNode.id;
+
+					var search = JSON.parse(localStorage.getItem(type)).filter(function (item) {
+						if (item.attributes.canonicalTitle.toLowerCase().includes(self.value.toLowerCase())) {
+							return item;
+						}
+					});
+
+					templates.renderOverview(type, search);
+
+					e.preventDefault();
+				}, false);
+			});
 
 			router.init();
 		}

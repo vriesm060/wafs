@@ -8,6 +8,8 @@
 </head>
 <body>
 
+	<div class="loader"></div>
+
 	<nav class="site-nav">
 		<ul>
 			<li><a href="index.html">Anime</a></li>
@@ -17,7 +19,7 @@
 
 	<section id="anime" class="active">
 		<form class="options">
-			<button type="button" id="sort">Sort by rank</button>
+			<button type="button" class="sort">Sort by rank</button>
 			<input type="text" name="search" placeholder="Zoek een Anime" value="">
 		</form>
 
@@ -25,7 +27,10 @@
 			<li>
 				<a data-bind="link" href="#details">
 					<img data-bind="posterImage">
-					<h1 data-bind="title"></h1>
+					<article>
+						<h1 data-bind="title"></h1>
+						<h2 data-bind="rank">Rank: </h2>
+					</article>
 				</a>
 			</li>
 		</ul>
@@ -33,7 +38,7 @@
 
 	<section id="manga">
 		<form class="options">
-			<button type="button" id="sort">Sort by rank</button>
+			<button type="button" class="sort">Sort by rank</button>
 			<input type="text" name="search" placeholder="Zoek een Manga" value="">
 		</form>
 
@@ -41,7 +46,10 @@
 			<li>
 				<a data-bind="link" href="#details">
 					<img data-bind="posterImage">
-					<h1 data-bind="title"></h1>
+					<article>
+						<h1 data-bind="title"></h1>
+						<h2 data-bind="rank">Rank: </h2>
+					</article>
 				</a>
 			</li>
 		</ul>
