@@ -7,7 +7,8 @@ var api = {
       'canonicalTitle',
       'posterImage',
       'coverImage',
-      'synopsis'
+      'synopsis',
+      'popularityRank'
     ],
     pageLimit: 20,
     pageOffset: 0
