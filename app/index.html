@@ -20,7 +20,7 @@
 	<section id="anime" class="active">
 		<form class="options">
 			<button type="button" class="sort">Sort by rank</button>
-			<input type="text" name="search" placeholder="Zoek een Anime" value="">
+			<input type="text" name="search" placeholder="Zoek een Anime" value="" autocomplete="off">
 		</form>
 
 		<ul id="anime-shows" class="shows">
@@ -57,7 +57,9 @@
 
 	<section id="details">
 		<article>
-			<img data-bind="coverImage">
+			<div class="cover">
+				<img data-bind="coverImage">
+			</div>
 			<h1 data-bind="title"></h1>
 			<p data-bind="synopsis"></p>
 		</article>

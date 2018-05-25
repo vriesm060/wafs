@@ -244,6 +244,14 @@ section.active {
 	background-color: #fff;
 }
 
+#details .cover {
+	display: block;
+	overflow: hidden;
+	width: 100%;
+	height: auto;
+	max-height: 20rem;
+}
+
 #details > article img {
 	display: block;
 	width: 100%;
@@ -263,4 +271,5 @@ section.active {
 	max-width: 42.5em;
 	padding: 24px;
 	padding: var(--spacing-unit);
+	color: var(--black-color);
 }
