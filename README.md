@@ -98,12 +98,22 @@ An extra feature in this app is that you can manually navigate to an Anime or Ma
 
 ![Detail page](screenshots/detail.png)
 
-#### Object Method Diagram
----
-
-![Object Method Diagram](screenshots/flow.png)
-
 #### Flow
 ---
 
-![Flow](screenshots/object-method-diagram.png)
+**Standard flow:**
+
+![Standard flow](screenshots/flow-standard.png)
+
+**Detail flow:**
+
+![Detail flow](screenshots/flow-detail.png)
+
+**User input flow:**
+
+![User input flow](screenshots/flow-input.png)
+
+#### Object Method Diagram
+---
+
+![Object Method Diagram](screenshots/object-method-diagram2.png)
